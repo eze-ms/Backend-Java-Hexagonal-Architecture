@@ -19,6 +19,6 @@ public class FindApplicablePriceUseCase {
         return priceRepository
                 .findByBrandIdAndProductIdAndDate(brandId, productId, applicationDate)
                 .stream()
-                .max(Comparator.comparingInt(Price::getPriority));
+                .max(Comparator.comparingInt(Price::priority));
     }
 }

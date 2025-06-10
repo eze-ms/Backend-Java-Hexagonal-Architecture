@@ -32,13 +32,13 @@ public class PriceResponseDTO {
 
     public static PriceResponseDTO from(Price price) {
         return new PriceResponseDTO(
-                price.getProductId(),
-                price.getBrandId(),
-                price.getPriceList(),
-                price.getStartDate(),
-                price.getEndDate(),
-                price.getPrice(),
-                price.getCurrency()
+                price.productId(),
+                price.brandId(),
+                price.priceList(),
+                price.startDate(),
+                price.endDate(),
+                price.price(),
+                price.currency()
         );
     }
 
