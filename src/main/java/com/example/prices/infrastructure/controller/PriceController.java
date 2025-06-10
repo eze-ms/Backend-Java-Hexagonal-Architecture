@@ -33,7 +33,8 @@ public class PriceController {
 
     @GetMapping
     public ResponseEntity<PriceResponseDTO> getApplicablePrice(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
+            @RequestParam
+            @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss") LocalDateTime date,
             @RequestParam Long productId,
             @RequestParam Long brandId
     ) {
@@ -43,4 +44,5 @@ public class PriceController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
 }
