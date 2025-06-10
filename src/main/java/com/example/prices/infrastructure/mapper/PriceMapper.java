@@ -20,14 +20,14 @@ public class PriceMapper {
 
     public static PriceEntity toEntity(Price domain) {
         return PriceEntity.builder()
-                .brandId(domain.getBrandId())
-                .productId(domain.getProductId())
-                .priceList(domain.getPriceList())
-                .priority(domain.getPriority())
-                .price(domain.getPrice())
-                .currency(domain.getCurrency())
-                .startDate(domain.getStartDate())
-                .endDate(domain.getEndDate())
+                .brandId(domain.brandId())
+                .productId(domain.productId())
+                .priceList(domain.priceList())
+                .priority(domain.priority())
+                .price(domain.price())
+                .currency(domain.currency())
+                .startDate(domain.startDate())
+                .endDate(domain.endDate())
                 .build();
     }
 }
