@@ -80,11 +80,6 @@ Frameworks:
 git clone https://github.com/eze-ms/Backend-Java-Hexagonal-Architecture
 ```
 
-Run Locally:
-```bash
-./mvn spring-boot:run
-
-```
 Swagger available at:
 ```bash
 http://localhost:8080/swagger-ui.html
