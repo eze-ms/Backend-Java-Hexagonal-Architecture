@@ -15,10 +15,11 @@ public class FindApplicablePriceUseCase {
         this.priceRepository = priceRepository;
     }
 
-    public Optional<Price> execute(Long brandId, Long productId, LocalDateTime applicationDate) {
+    public Price execute(Long brandId, Long productId, LocalDateTime applicationDate) {
         return priceRepository
                 .findByBrandIdAndProductIdAndDate(brandId, productId, applicationDate)
                 .stream()
-                .max(Comparator.comparingInt(Price::priority));
+                .max(Comparator.comparingInt(Price::priority))
+                .orElseThrow(() -> new PriceNotFoundException("No se encontró un precio aplicable para los parámetros proporcionados."));
     }
 }
