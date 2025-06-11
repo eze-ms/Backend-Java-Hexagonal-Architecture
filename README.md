@@ -75,9 +75,12 @@ Frameworks:
 - Mockito
 ---
 
-## 🛠️ Installation
+## 🛠️ Run Locally
 ```bash
 git clone https://github.com/eze-ms/Backend-Java-Hexagonal-Architecture
+cd Backend-Java-Hexagonal-Architecture
+mvn clean install
+mvn spring-boot:run
 ```
 
 Swagger available at:
@@ -91,6 +94,23 @@ http://localhost:8080/h2-console
 JDBC URL: jdbc:h2:mem:pricesdb
 User: sa
 Password: password
+```
+---
+# 🛠️ Example Request
+```bash
+GET /prices?date=2020-06-14T16:00:00&productId=35455&brandId=1
+```
+Response:
+```bash
+{
+"productId": 35455,
+"brandId": 1,
+"priceList": 2,
+"startDate": "2020-06-14T15:00:00",
+"endDate": "2020-06-14T18:30:00",
+"price": 25.45,
+"currency": "EUR"
+}
 ```
 ---
 
