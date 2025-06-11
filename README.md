@@ -1,8 +1,8 @@
 # Prices API - Spring Boot Hexagonal Architecture
 
-![Backend](https://img.shields.io/badge/backend-Java%2017-orange?style=flat-square)
+![Backend](https://img.shields.io/badge/backend-Java%2021-orange?style=flat-square)
 ![Framework](https://img.shields.io/badge/framework-Spring%20Boot-6db33f?style=flat-square)
-![Security](https://img.shields.io/badge/security-JWT-yellow?style=flat-square)
+![Architecture](https://img.shields.io/badge/architecture-Hexagonal-blueviolet?style=flat-square)
 ![Tests](https://img.shields.io/badge/tests-JUnit%205-blue?style=flat-square)
 
 ---
@@ -75,25 +75,21 @@ Frameworks:
 - Mockito
 ---
 
-## 🛠️ Instalación
+## 🛠️ Installation
 ```bash
 git clone https://github.com/eze-ms/Backend-Java-Inditex-Kairos
 ```
 
-
-#### Run Locally
-
+Run Locally:
 ```bash
 ./mvn spring-boot:run
 
 ```
-#### Start Spring Boot
 Swagger available at:
 ```bash
 http://localhost:8080/swagger-ui.html
 ```
 
-#### H2
 H2 Console:
 ```bash
 http://localhost:8080/h2-console
@@ -101,8 +97,6 @@ JDBC URL: jdbc:h2:mem:pricesdb
 User: sa
 Password: password
 ```
-
 ---
 
 © 2025. Developed by Ezequiel Macchi Seoane.
-
