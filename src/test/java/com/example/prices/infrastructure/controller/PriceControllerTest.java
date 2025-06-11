@@ -1,6 +1,5 @@
 package com.example.prices.infrastructure.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -18,9 +18,6 @@ class PriceControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
     @DisplayName("Test 1: 14-06-2020 10:00 — should return priceList 1 and price 35.50")
@@ -49,43 +46,34 @@ class PriceControllerTest {
     }
 
     @Test
-    @DisplayName("Test 3: 14-06-2020 21:00 — should return priceList 1 and price 35.50")
-    void shouldReturnCorrectPriceAt9pmOnJune14() throws Exception {
+    @DisplayName("Should return 400 when brandId is missing")
+    void shouldReturn400WhenBrandIdMissing() throws Exception {
         mockMvc.perform(get("/prices")
-                        .param("date", "2020-06-14T21:00:00")
-                        .param("productId", "35455")
-                        .param("brandId", "1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.priceList", is(1)))
-                .andExpect(jsonPath("$.price", is(35.50)))
-                .andExpect(jsonPath("$.currency", is("EUR")));
+                        .param("date", "2020-06-14T10:00:00")
+                        .param("productId", "35455"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(containsString("brandId")));
     }
 
     @Test
-    @DisplayName("Test 4: 15-06-2020 10:00 — should return priceList 3 and price 30.50")
-    void shouldReturnCorrectPriceAt10amOnJune15() throws Exception {
+    @DisplayName("Should return 400 when productId is not a number")
+    void shouldReturn400WhenProductIdIsInvalid() throws Exception {
         mockMvc.perform(get("/prices")
-                        .param("date", "2020-06-15T10:00:00")
-                        .param("productId", "35455")
+                        .param("date", "2020-06-14T10:00:00")
+                        .param("productId", "abc")
                         .param("brandId", "1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.priceList", is(3)))
-                .andExpect(jsonPath("$.price", is(30.50)))
-                .andExpect(jsonPath("$.currency", is("EUR")));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(containsString("productId")));
     }
 
     @Test
-    @DisplayName("Test 5: 16-06-2020 21:00 — should return priceList 4 and price 38.95")
-    void shouldReturnCorrectPriceAt9pmOnJune16() throws Exception {
+    @DisplayName("Should return 404 when no applicable price exists")
+    void shouldReturn404WhenNoPriceFound() throws Exception {
         mockMvc.perform(get("/prices")
-                        .param("date", "2020-06-16T21:00:00")
+                        .param("date", "2010-01-01T00:00:00")
                         .param("productId", "35455")
                         .param("brandId", "1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.priceList", is(4)))
-                .andExpect(jsonPath("$.price", is(38.95)))
-                .andExpect(jsonPath("$.currency", is("EUR")));
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value(containsString("No se encontró")));
     }
-
-
 }

@@ -1,12 +1,13 @@
 package com.example.prices.infrastructure.mapper;
 
 import com.example.prices.domain.model.Price;
-import com.example.prices.infrastructure.dto.PriceResponseDTO;
 import com.example.prices.infrastructure.entity.PriceEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PriceMapper {
 
-    public static Price toDomain(PriceEntity entity) {
+    public Price toDomain(PriceEntity entity) {
         return new Price(
                 entity.getBrandId(),
                 entity.getProductId(),
@@ -19,7 +20,7 @@ public class PriceMapper {
         );
     }
 
-    public static PriceEntity toEntity(Price domain) {
+    public PriceEntity toEntity(Price domain) {
         return PriceEntity.builder()
                 .brandId(domain.brandId())
                 .productId(domain.productId())
@@ -33,3 +34,4 @@ public class PriceMapper {
     }
 
 }
+

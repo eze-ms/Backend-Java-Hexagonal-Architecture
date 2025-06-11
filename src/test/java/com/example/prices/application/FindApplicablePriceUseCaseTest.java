@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -49,7 +48,6 @@ class FindApplicablePriceUseCaseTest {
         assertEquals(new BigDecimal("35.50"), result.price());
     }
 
-
     @Test
     @DisplayName("Test 2: 14-06-2020 16:00 — should return priceList 2 and price 25.45 (higher priority)")
     void testFindPrice_case2() {
@@ -74,8 +72,6 @@ class FindApplicablePriceUseCaseTest {
         assertEquals(2, result.priceList());
         assertEquals(new BigDecimal("25.45"), result.price());
     }
-
-
 
     @Test
     @DisplayName("Should throw PriceNotFoundException when no prices found")

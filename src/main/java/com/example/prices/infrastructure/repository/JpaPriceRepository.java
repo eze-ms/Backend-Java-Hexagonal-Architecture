@@ -11,16 +11,19 @@ import java.util.List;
 @Repository
 public class JpaPriceRepository implements PriceRepository {
     private final SpringDataPriceRepository springRepo;
+    private final PriceMapper priceMapper;
 
-    public JpaPriceRepository(SpringDataPriceRepository springRepo) {
+    public JpaPriceRepository(SpringDataPriceRepository springRepo, PriceMapper priceMapper) {
         this.springRepo = springRepo;
+        this.priceMapper = priceMapper;
     }
 
     @Override
     public List<Price> findByBrandIdAndProductIdAndDate(Long brandId, Long productId, LocalDateTime date) {
         return springRepo.findByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
                 brandId, productId, date, date
-        ).stream().map(PriceMapper::toDomain).toList();
+        ).stream().map(priceMapper::toDomain).toList();
     }
 }
+
 
