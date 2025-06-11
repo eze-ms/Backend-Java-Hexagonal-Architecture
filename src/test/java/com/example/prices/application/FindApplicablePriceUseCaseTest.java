@@ -89,6 +89,4 @@ class FindApplicablePriceUseCaseTest {
 
         assertThrows(PriceNotFoundException.class, () -> useCase.execute(brandId, productId, date));
     }
-
-
 }
