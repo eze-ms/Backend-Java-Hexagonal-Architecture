@@ -1,10 +1,17 @@
 package com.example.prices.infrastructure.entity;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+
 
 @Entity
 @Table(name = "PRICES")
