@@ -77,7 +77,7 @@ Frameworks:
 
 ## 🛠️ Installation
 ```bash
-git clone https://github.com/eze-ms/Backend-Java-Inditex-Kairos
+git clone https://github.com/eze-ms/Backend-Java-Hexagonal-Architecture
 ```
 
 Run Locally:
