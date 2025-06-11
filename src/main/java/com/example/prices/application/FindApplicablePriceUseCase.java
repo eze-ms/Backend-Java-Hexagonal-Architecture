@@ -2,10 +2,10 @@ package com.example.prices.application;
 
 import com.example.prices.domain.model.Price;
 import com.example.prices.domain.port.PriceRepository;
+import com.example.prices.exception.PriceNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
-import java.util.Optional;
 
 public class FindApplicablePriceUseCase {
 

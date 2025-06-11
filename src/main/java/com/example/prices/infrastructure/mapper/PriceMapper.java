@@ -1,6 +1,7 @@
 package com.example.prices.infrastructure.mapper;
 
 import com.example.prices.domain.model.Price;
+import com.example.prices.infrastructure.dto.PriceResponseDTO;
 import com.example.prices.infrastructure.entity.PriceEntity;
 
 public class PriceMapper {
@@ -30,4 +31,5 @@ public class PriceMapper {
                 .endDate(domain.endDate())
                 .build();
     }
+
 }

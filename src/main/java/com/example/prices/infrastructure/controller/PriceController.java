@@ -1,7 +1,9 @@
 package com.example.prices.infrastructure.controller;
 
 import com.example.prices.application.FindApplicablePriceUseCase;
+import com.example.prices.domain.model.Price;
 import com.example.prices.infrastructure.dto.PriceResponseDTO;
+import com.example.prices.infrastructure.mapper.PriceMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -16,9 +18,11 @@ import java.time.LocalDateTime;
 public class PriceController {
 
     private final FindApplicablePriceUseCase findPriceUseCase;
+    private final PriceMapper mapper;
 
-    public PriceController(FindApplicablePriceUseCase findPriceUseCase) {
+    public PriceController(FindApplicablePriceUseCase findPriceUseCase, PriceMapper mapper) {
         this.findPriceUseCase = findPriceUseCase;
+        this.mapper = mapper;
     }
 
     @Operation(
@@ -30,17 +34,14 @@ public class PriceController {
             @ApiResponse(responseCode = "404", description = "No applicable price found"),
             @ApiResponse(responseCode = "400", description = "Invalid request parameters")
     })
-
     @GetMapping
     public ResponseEntity<PriceResponseDTO> getApplicablePrice(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
             @RequestParam Long productId,
             @RequestParam Long brandId
     ) {
-        return findPriceUseCase
-                .execute(brandId, productId, date)
-                .map(PriceResponseDTO::from)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Price price = findPriceUseCase.execute(brandId, productId, date);
+        return ResponseEntity.ok(PriceResponseDTO.from(price));
     }
 }
+
