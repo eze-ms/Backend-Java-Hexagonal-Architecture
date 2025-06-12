@@ -46,6 +46,45 @@ class PriceControllerTest {
     }
 
     @Test
+    @DisplayName("Test 3: 14-06-2020 21:00 — should return priceList 1 and price 35.50")
+    void shouldReturnCorrectPriceAt9pmOnJune14() throws Exception {
+        mockMvc.perform(get("/prices")
+                        .param("date", "2020-06-14T21:00:00")
+                        .param("productId", "35455")
+                        .param("brandId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.priceList", is(1)))
+                .andExpect(jsonPath("$.price", is(35.50)))
+                .andExpect(jsonPath("$.currency", is("EUR")));
+    }
+
+    @Test
+    @DisplayName("Test 4: 15-06-2020 10:00 — should return priceList 3 and price 30.50")
+    void shouldReturnCorrectPriceAt10amOnJune15() throws Exception {
+        mockMvc.perform(get("/prices")
+                        .param("date", "2020-06-15T10:00:00")
+                        .param("productId", "35455")
+                        .param("brandId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.priceList", is(3)))
+                .andExpect(jsonPath("$.price", is(30.50)))
+                .andExpect(jsonPath("$.currency", is("EUR")));
+    }
+
+    @Test
+    @DisplayName("Test 5: 16-06-2020 21:00 — should return priceList 4 and price 38.95")
+    void shouldReturnCorrectPriceAt9pmOnJune16() throws Exception {
+        mockMvc.perform(get("/prices")
+                        .param("date", "2020-06-16T21:00:00")
+                        .param("productId", "35455")
+                        .param("brandId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.priceList", is(4)))
+                .andExpect(jsonPath("$.price", is(38.95)))
+                .andExpect(jsonPath("$.currency", is("EUR")));
+    }
+
+    @Test
     @DisplayName("Should return 400 when brandId is missing")
     void shouldReturn400WhenBrandIdMissing() throws Exception {
         mockMvc.perform(get("/prices")
